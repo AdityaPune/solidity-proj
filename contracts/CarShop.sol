@@ -3,15 +3,18 @@ pragma solidity >=0.4.11;
 contract CarShop{
 
     struct Car{
+        uint id;
         string name;   
         uint price;
-        //uint add;
     }
 
-    Car[] public cars;
+    mapping(uint => Car) public cars;
 
-    function addCar(string memory _name, uint _price ) public {
-        cars.push(Car(_name, _price));
+    uint public carsCount;
+
+    function addCar(string memory _name, uint _price) private {
+        carsCount++; 
+        cars[carsCount] = Car(carsCount, _name, _price);
     }
 
 
